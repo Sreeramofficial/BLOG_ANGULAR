@@ -1,26 +1,36 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import ApiError from "./Components/ApiError";
 
 function UserDetails() {
   const [users, updateUser] = useState([]);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     loadUsers();
   }, []);
 
   const loadUsers = async () => {
-    const result = await axios.get("http://localhost:8080/getUser");
-    console.log(result.data);
-    updateUser(result.data);
+    try {
+      const result = await axios.get("http://localhost:8080/getUser");
+      console.log(result.data);
+      updateUser(result.data);
+    } catch (error) {
+      setError(true);
+    }
   };
 
   return (
     <div>
-      <h4>User List</h4>
-      {users.map(
-        (user, k) => (
-          <h6 key={k}>{user.name}</h6>
-        ) 
+      {/* cant use if statement directly inside jsx */}
+      {error ? (
+        <ApiError></ApiError>
+      ) : (
+        users.map((user, k) => (
+          <div>
+            <h6 key={k}>{user.name}</h6>
+          </div>
+        ))
       )}
     </div>
   );

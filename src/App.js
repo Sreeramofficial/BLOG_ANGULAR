@@ -1,6 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
-import UserDetails from './UserDetails';
+import logo from "./logo.svg";
+import "./App.css";
+import UserDetails from "./UserDetails";
+import ApiError from "./Components/ApiError";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         </a>
       </header> */}
       <UserDetails></UserDetails>
+      {/* <ApiError /> */}
     </div>
   );
 }
