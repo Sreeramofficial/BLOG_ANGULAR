@@ -1,9 +1,18 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-function AddUser() {
+function EditUser() {
   let navigate = useNavigate();
+  const [users, updateUser] = useState([]);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    loadUsers();
+  }, []);
+
+  //to get current user from param
+  const { id } = useParams();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -16,8 +25,17 @@ function AddUser() {
   };
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/addUser", user);
+    await axios.put(`http://localhost:8080/updateUser/${id}`, user);
     navigate("/");
+  };
+
+  const loadUsers = async () => {
+    try {
+      const result = await axios.get(`http://localhost:8080/getUserBYId/${id}`);
+      setUser(result.data);
+    } catch (error) {
+      setError(true);
+    }
   };
 
   return (
@@ -71,4 +89,4 @@ function AddUser() {
   );
 }
 
-export default AddUser;
+export default EditUser;
