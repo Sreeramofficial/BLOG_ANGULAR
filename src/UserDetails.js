@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ApiError from "./Components/ApiError";
+import { Link } from "react-router-dom";
 
 function UserDetails() {
   const [users, updateUser] = useState([]);
@@ -22,6 +23,9 @@ function UserDetails() {
 
   return (
     <div>
+      <Link type="button" className="btn btn-primary" to="/addUser">
+        Add User
+      </Link>
       {/* cant use if statement directly inside jsx */}
       {error ? (
         <ApiError></ApiError>
