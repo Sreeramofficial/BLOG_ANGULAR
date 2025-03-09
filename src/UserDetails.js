@@ -28,35 +28,44 @@ function UserDetails() {
 
   return (
     <div>
-      <Link type="button" className="btn btn-primary" to="/addUser">
-        Add User
-      </Link>
-      <br></br>
-      {/* cant use if statement directly inside jsx */}
+      <br />
       {error ? (
-        <ApiError></ApiError>
+        <ApiError />
       ) : (
-        users.map((user, k) => (
-          <div>
-            <h6 key={k}>{user.name}</h6>
-            <button
-              style={{ marginRight: 20 }}
-              type="button"
-              class="btn btn-danger"
-              onClick={() => deleteUser(user.id)}
-            >
-              Delete {user.name}
-            </button>
+        <>
+          <h4 style={{ textAlign: "center", marginBottom: "20px" }}>
+            Users List
+          </h4>
 
-            <Link
-              type="button"
-              className="btn btn-primary"
-              to={`/updateUser/${user.id}`}
+          {users.map((user, k) => (
+            <div
+              style={{ backgroundColor: "red", margin: 50, paddingTop: 40 }}
+              key={k}
             >
-              Update {user.name}
+              <h6>{user.name}</h6>
+              <button
+                style={{ marginRight: 20 }}
+                type="button"
+                className="btn btn-danger"
+                onClick={() => deleteUser(user.id)}
+              >
+                Delete {user.name}
+              </button>
+              <Link
+                type="button"
+                className="btn btn-primary"
+                to={`/updateUser/${user.id}`}
+              >
+                Update {user.name}
+              </Link>
+            </div>
+          ))}
+          <div style={{ marginTop: 50 }}>
+            <Link type="button" className="btn btn-primary" to="/addUser">
+             Add User 
             </Link>
           </div>
-        ))
+        </>
       )}
     </div>
   );

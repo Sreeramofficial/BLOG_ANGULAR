@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 function AddUser() {
   let navigate = useNavigate();
@@ -14,6 +16,7 @@ function AddUser() {
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post("http://localhost:8080/addUser", user);
@@ -21,52 +24,92 @@ function AddUser() {
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Sample Bootstrap Form</h2>
-      <form onSubmit={(e) => onSubmit(e)}>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="name"
-            name="name" // Important for input name matching state
-            placeholder="Enter your name"
-            value={name}
-            onChange={onInputChange}
-          />
-        </div>
+    <div
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
+      <Navbar />
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ flex: "1" }} // Take up remaining space, fill viewport height
+      >
+        <div
+          className="container"
+          style={{
+            width: "500px", // Set width to 500px
+            height: "auto", // Allow height to adjust based on content
+            padding: "20px", // Padding for inner spacing
+            border: "1px solid #ddd", // Optional border
+            borderRadius: "8px", // Optional rounded corners
+            backgroundColor: "#f8f9fa", // Light background color
+          }}
+        >
+          <h2 className="text-center mb-4">Sample Bootstrap Form</h2>
+          <form onSubmit={(e) => onSubmit(e)}>
+            <div className="form-group">
+              <label
+                style={{ paddingBottom: 10, paddingTop: 10 }}
+                htmlFor="name"
+              >
+                Name
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                value={name}
+                onChange={onInputChange}
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email" // Important for input name matching state
-            placeholder="Enter your email"
-            value={email}
-            onChange={onInputChange}
-          />
-        </div>
+            <div className="form-group">
+              <label
+                style={{ paddingBottom: 10, paddingTop: 10 }}
+                htmlFor="email"
+              >
+                Email address
+              </label>
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={onInputChange}
+              />
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            id="password"
-            name="password" // Important for input name matching state
-            placeholder="Password"
-            value={password}
-            onChange={onInputChange}
-          />
-        </div>
+            <div className="form-group">
+              <label
+                style={{ paddingBottom: 10, paddingTop: 10 }}
+                htmlFor="password"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                className="form-control"
+                id="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={onInputChange}
+              />
+            </div>
 
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+            <button
+              style={{ marginTop: 40 }}
+              type="submit"
+              className="btn btn-primary btn-block"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+      <Footer />
     </div>
   );
 }

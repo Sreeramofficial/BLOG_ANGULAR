@@ -1,0 +1,20 @@
+.navbar-nav-right {
+  margin-left: auto;
+}
+
+.navbar-nav-right .btn {
+  margin-left: 20px;
+}
+
+.navbar-brand-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.nav-footer {
+  margin-top: 50px;
+  padding-top: 50px;
+}
+.nav-header {
+  background-color: rgb(56, 56, 56);
+}
